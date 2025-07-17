@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Mando: Licitación PMT-680</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #030712; color: #9ca3af; }
+        .card { background-color: #111827; border: 1px solid #374151; border-radius: 0.75rem; }
+        .btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; }
+        .btn:disabled { cursor: not-allowed; opacity: 0.5; }
+        .btn-primary { background-color: #2563eb; color: white; }
+        .btn-primary:hover:not(:disabled) { background-color: #1d4ed8; }
+        .btn-secondary { background-color: #374151; color: #d1d5db; }
+        .btn-secondary:hover:not(:disabled) { background-color: #4b5563; }
+        .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.8); z-index: 40; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
+        .modal-content { background-color: #1f2937; border: 1px solid #374151; padding: 0; border-radius: 0.75rem; width: 90%; max-width: 800px; z-index: 50; transform: scale(0.95); transition: transform 0.3s ease; overflow: hidden; }
+        .modal-backdrop:not(.hidden) .modal-content { transform: scale(1); }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-pendiente { background-color: #4a3a19; color: #fef3c7; }
+        .status-enviado { background-color: #1e3a8a; color: #dbeafe; }
+        .status-recibido { background-color: #064e3b; color: #d1fae5; }
+        .input-dark { background-color: #374151; border: 1px solid #4b5563; color: #d1d5db; border-radius: 0.375rem; padding: 0.5rem 0.75rem; width: 100%; }
+        .input-dark:focus { outline: none; border-color: #2563eb; ring: 1px; ring-color: #2563eb; }
+        .progress-bar { background-color: #374151; border-radius: 9999px; overflow: hidden; }
+        .progress-bar-inner { background-color: #2563eb; height: 100%; transition: width 0.5s ease-in-out; }
+        .tab { padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; color: #6b7280; font-weight: 600; }
+        .tab.active { border-bottom-color: #2563eb; color: #eff6ff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .metric-item { cursor: pointer; transition: background-color 0.2s ease; border-radius: 0.5rem; }
+        .metric-item:hover { background-color: #374151; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div id="app" class="max-w-screen-xl mx-auto">
+        <!-- HEADER -->
+        <header class="mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-white">Centro de Mando: Licitación PMT-680</h1>
+                    <p class="text-gray-400 mt-1">Plataforma de Gestión Estratégica para Grupo MUSA.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2">
+                    <button id="howToUseBtn" class="btn btn-secondary"><i data-lucide="help-circle" class="w-4 h-4"></i>Cómo Usar</button>
+                    <button id="addBidderBtn" class="btn btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Añadir Licitante</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="border-b border-gray-700 mb-8">
+            <nav class="flex -mb-px" id="tabs">
+                <button data-tab="dashboard" class="tab active">Dashboard</button>
+                <button data-tab="dataroom" class="tab">Data Room</button>
+                <button data-tab="config" class="tab">Configuración</button>
+            </nav>
+        </div>
+
+        <!-- TAB CONTENT -->
+        <div id="tab-content-container">
+            <!-- DASHBOARD TAB -->
+            <div id="dashboard-content" class="tab-content active">
+                <main class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="card p-6">
+                            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="target" class="text-blue-500"></i>Próximos Pasos</h2>
+                            <div id="next-actions-list" class="space-y-3 text-sm"></div>
+                        </div>
+                         <div class="card p-6">
+                            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="bar-chart-3" class="text-blue-500"></i>Dashboard Ejecutivo</h2>
+                            <div id="metrics-list" class="space-y-1 text-gray-300"></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="card overflow-hidden">
+                            <div class="p-6"><h2 class="text-xl font-bold text-white flex items-center gap-2"><i data-lucide="users" class="text-blue-500"></i>Panel de Licitantes</h2></div>
+                            <div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-400"><thead class="text-xs text-gray-300 uppercase bg-gray-700"><tr><th scope="col" class="px-6 py-3">Licitante</th><th scope="col" class="px-6 py-3 w-1/4">Progreso</th><th scope="col" class="px-6 py-3 text-center">NDA</th><th scope="col" class="px-6 py-3 text-center">Visita</th><th scope="col" class="px-6 py-3 text-center">Acciones</th></tr></thead><tbody id="bidders-table-body" class="divide-y divide-gray-700"></tbody></table></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- DATA ROOM TAB -->
+            <div id="dataroom-content" class="tab-content">
+                 <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="building-2" class="text-blue-500"></i>Activos en Licitación</h2>
+                        <div id="property-list" class="space-y-2"></div>
+                    </div>
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="folder-kanban" class="text-blue-500"></i>Documentos Base (VDR)</h2>
+                        <div id="template-list" class="space-y-4"></div>
+                    </div>
+                 </main>
+            </div>
+
+            <!-- CONFIG TAB -->
+            <div id="config-content" class="tab-content">
+                <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="calendar-days" class="text-blue-500"></i>Gestión de Visitas a Sitio</h2>
+                        <div id="site-visits-admin" class="space-y-3">
+                            <p class="text-sm text-gray-400">Define las fechas disponibles para que los licitantes soliciten una visita.</p>
+                            <input type="date" id="visit-date-input" class="input-dark w-full">
+                            <button id="add-visit-date-btn" class="btn btn-secondary w-full text-sm">Añadir Fecha</button>
+                            <ul id="available-dates-list" class="text-sm space-y-1 mt-2"></ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div id="metricDetailModal" class="modal-backdrop hidden">
+        <div id="metricDetailModalContent" class="modal-content !max-w-3xl p-6"></div>
+    </div>
+    <div id="propertyDetailModal" class="modal-backdrop hidden">
+        <div id="propertyDetailModalContent" class="modal-content !max-w-4xl"></div>
+    </div>
+    <div id="addBidderModal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-4">Añadir Nuevo Licitante</h3>
+                <form id="addBidderForm" class="space-y-4">
+                    <div><label for="bidderName" class="block text-sm font-medium text-gray-300">Nombre del Licitante / Contacto</label><input type="text" id="bidderName" class="input-dark mt-1" required></div>
+                    <div><label for="bidderEmail" class="block text-sm font-medium text-gray-300">Email (será su usuario)</label><input type="email" id="bidderEmail" class="input-dark mt-1" required></div>
+                    <div><label for="bidderCompany" class="block text-sm font-medium text-gray-300">Empresa / Fondo</label><input type="text" id="bidderCompany" class="input-dark mt-1" required></div>
+                    <div class="flex justify-end gap-3 pt-4"><button type="button" id="cancelAddBidder" class="btn btn-secondary">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Licitante</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="howToUseModal" class="modal-backdrop hidden">
+        <div class="modal-content p-8">
+            <h3 class="text-xl font-bold text-white mb-4">Cómo Usar esta Herramienta</h3>
+            <div class="space-y-4 text-gray-300">
+                 <p><strong>Paso 1: Explora el Dashboard.</strong> Haz clic en cualquier métrica del "Dashboard Ejecutivo" para ver un desglose detallado. Para el NOI 2026, puedes modelar escenarios cambiando la renta de mercado.</p>
+                <p><strong>Paso 2: Gestiona Licitantes.</strong> Haz clic en "Gestionar" en la fila de un licitante. Completa su "Razón Social" y "Representante Legal" para que los contratos se generen correctamente.</p>
+                <p><strong>Paso 3: Genera y Envía el NDA.</strong> Dentro del panel de gestión, haz clic en "Enviar" junto al NDA para abrir el generador. Revisa el documento poblado y márcalo como enviado.</p>
+            </div>
+            <div class="flex justify-end mt-6">
+                <button id="closeHowToUse" class="btn btn-primary">Entendido</button>
+            </div>
+        </div>
+    </div>
+    <div id="manageBidderModal" class="modal-backdrop hidden">
+        <div id="manageBidderModalContent" class="modal-content"></div>
+    </div>
+    <div id="templateModal" class="modal-backdrop hidden">
+        <div id="templateModalContent" class="modal-content !max-w-4xl"></div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+
+    // --- HELPER FUNCTIONS ---
+    const generatePassword = (length = 10) => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let password = '';
+        for (let i = 0; i < length; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));
+        return password;
+    };
+    
+    const formatCurrency = (value) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+
+    // --- STATE MANAGEMENT ---
+    const state = {
+        properties: [
+            { id: 1, name: 'CEDIS Vía Rápida', detail: '359,628 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=F38F%2BRW', tenants: [
+                { name: 'SEARS', gla: '176,248 Sq Ft', rent: '$0.70/ft²', expiration: 'Ago 2029', escalation: 'CPI Anual', type: 'NNN' },
+                { name: 'CECSO', gla: '183,380 Sq Ft', rent: '$0.51/ft²', expiration: 'Abr 2026', escalation: '2% Fijo Anual', type: 'NNN' }
+            ]},
+            { id: 2, name: 'Waldo’s Lago', detail: '275,109 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=G337%2BJ4', tenants: [
+                { name: 'Rogers Foam', gla: '162,557 Sq Ft', rent: '$1.02/ft²', expiration: 'Feb 2028', escalation: '4% Fijo Anual', type: 'NNN' },
+                { name: 'Dragon Trade', gla: '37,325 Sq Ft', rent: '$0.95/ft²', expiration: 'Jun 2034', escalation: 'CPI (USA)', type: 'NNN' },
+                { name: 'Seacon Global', gla: '75,227 Sq Ft', rent: '$0.77/ft²', expiration: 'Oct 2025', escalation: '3% Anual', type: 'NNN' }
+            ]},
+            { id: 3, name: 'VLINK Estación García', detail: '43,700 Sq Ft (BTS)', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=F38C%2B9W6', tenants: [] }
+        ],
+        metrics: [
+            { type: 'header', label: 'Métricas del Portafolio' },
+            { type: 'metric', id: 'gla', name: 'GLA Total', value: '678,437 Sq Ft', icon: 'maximize', details: { title: 'Desglose de GLA Total', type: 'gla-breakdown' } },
+            { type: 'metric', id: 'noi2025', name: 'NOI Actual (2025)', value: 'US $4.79 MM', icon: 'trending-up', details: { title: 'Desglose de NOI Actual (2025)', type: 'list', items: [ { label: 'CEDIS Vía Rápida', value: formatCurrency(2325250) }, { label: 'Waldo’s Lago', value: formatCurrency(2468049) }, { label: 'VLINK Estación García', value: formatCurrency(0) } ] } },
+            { type: 'metric', id: 'noi2026', name: 'NOI (Expected 2026)', value: 'US $5.58 MM', icon: 'trending-up', details: { 
+                title: 'Modelo Interactivo NOI 2026', 
+                type: 'interactive-noi', 
+                defaultMarketRent: 0.75,
+                components: [
+                    { label: 'SEARS', gla: 176248, rate: 0.71, isMarketRate: false },
+                    { label: 'CECSO', gla: 183380, rate: 0.52, isMarketRate: false },
+                    { label: 'Rogers Foam', gla: 162557, rate: 1.06, isMarketRate: false },
+                    { label: 'Dragon Trade', gla: 37325, rate: 0.97, isMarketRate: false },
+                    { label: 'Seacon Global', gla: 75227, isMarketRate: true },
+                    { label: 'VLINK (3 meses)', gla: 43700, months: 3, isMarketRate: true }
+                ]
+            }},
+            { type: 'divider' },
+            { type: 'header', label: 'Indicadores de Mercado (Tijuana Q1 2025)' },
+            { type: 'metric', id: 'vacancy', name: 'Vacancia Reportada', value: '5.91%', icon: 'home', details: { title: 'Análisis de Vacancia', type: 'note', content: 'La vacancia reportada del 5.91% (con una vacancia efectiva cercana al 7.8%) indica una normalización del mercado post-pandemia. Esto crea una ventana de oportunidad para vender activos estabilizados antes de que la nueva oferta presione las rentas a la baja.' } },
+        ],
+        templates: [
+            { id: 'nda', name: 'Acuerdo de Confidencialidad (NDA)', content: `CONVENIO DE CONFIDENCIALIDAD QUE CELEBRAN POR UNA PARTE PROYECTOS Y CONSTRUCCIONES MUSA, S.A. DE C.V., REPRESENTADA POR MARTHA ALICIA FUENTES GARCÍA Y [RAZON_SOCIAL_RECEPTOR], REPRESENTADA POR [NOMBRE_REP_LEGAL_RECEPTOR], Y QUE EN LO SUCESIVO, CONJUNTAMENTE SE DENOMINAN COMO LAS “PARTES” E INDISTINTAMENTE COMO LA “PARTE”, CONVENIO QUE SE REGIRÁ AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: ...[RESTO DEL TEXTO DEL NDA]` },
+            { id: 'bases', name: 'Bases de Licitación', content: '' },
+            { id: 'oferta', name: 'Formato de Oferta Económica', content: '' }
+        ],
+        siteVisit: {
+            availableDates: [],
+            requests: [] 
+        },
+        bidders: [
+            { id: 1, name: 'Jorge Girault', company: 'FIBRA Prologis', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'jgirault@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'FIBRA Prologis, S. de R.L. de C.V.', legalRep: 'Jorge Girault', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 2, name: 'Álvaro Rodríguez', company: 'FIBRA Macquarie', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'arodriguez@macquarie.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Macquarie Mexican REIT', legalRep: 'Álvaro Rodríguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 3, name: 'Rogelio Jiménez', company: 'FIBRA Monterrey (FMTY)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rjimenez@fibramty.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Fibra MTY, S.A.P.I. de C.V.', legalRep: 'Rogelio Jiménez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 4, name: 'Sergio Argüelles', company: 'FIBRA Terrafina', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'sarguelles@terrafina.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Terrafina, S.A.B. de C.V.', legalRep: 'Sergio Argüelles', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 5, name: 'Gustavo Tomé', company: 'Corporate Properties of the Americas (CPA)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'gtome@cpamericas.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'CPA SERVICIOS, S. DE R.L. DE C.V.', legalRep: 'Gustavo Tomé', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 6, name: 'Lorenzo Dominique', company: 'Vesta (NYSE VTMX)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ldominique@vesta.com.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Corporación Inmobiliaria Vesta, S.A.B. de C.V.', legalRep: 'Lorenzo Dominique', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 7, name: 'Francisco Garza', company: 'Grupo GP / GP Desarrollos', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'fgarza@grupogp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GP Desarrollos, S.A. de C.V.', legalRep: 'Francisco Garza', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 8, name: 'Ignacio Pérez', company: 'STIVA', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'iperez@stiva.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'STIVA, S.A. de C.V.', legalRep: 'Ignacio Pérez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 9, name: 'Mark Hansen', company: 'Prologis Inc. (NYSE PLD)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'mhansen@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Prologis, Inc.', legalRep: 'Mark Hansen', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 10, name: 'Carlos Flores', company: 'Blackstone RE (BREIT / BREP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'cflores@blackstone.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Blackstone Real Estate', legalRep: 'Carlos Flores', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 11, name: 'Ramiro Cepeda', company: 'Brookfield AM', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rcepeda@brookfield.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Brookfield Asset Management', legalRep: 'Ramiro Cepeda', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 12, name: 'Adrián Teo', company: 'GIC (Singapur)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ateo@gic.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GIC Private Limited', legalRep: 'Adrián Teo', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 13, name: 'Khalid Al-Ghamdi', company: 'PIF (Arabia Saudí)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'kalghamdi@pif.gov.sa', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Public Investment Fund', legalRep: 'Khalid Al-Ghamdi', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 14, name: 'Adolfo Riveroll', company: 'JD Property (JDP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ariveroll@jd.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'JD Property', legalRep: 'Adolfo Riveroll', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 15, name: 'Chong Keh', company: 'Mapletree Logistics Trust (MLT)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ckeh@mapletree.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Mapletree Logistics Trust Management Ltd.', legalRep: 'Chong Keh', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 16, name: 'Tomás Cha', company: 'GLP Capital Partners', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'tcha@glp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GLP Capital Partners', legalRep: 'Tomás Cha', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 17, name: 'Richard Tse', company: 'ESR', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rtse@esr.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'ESR Group Limited', legalRep: 'Richard Tse', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 18, name: 'Oliver Rodriguez', company: 'Vlads Capital', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'oliver@vladscapital.com', password: generatePassword(), cel: '6641553525', oficina: '', legalEntity: 'Vlads Capital, S.A.P.I. de C.V.', legalRep: 'Oliver Rodriguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }}
+        ]
+    };
+
+    // --- DOM ELEMENT REFERENCES ---
+    const dom = {
+        nextActionsList: document.getElementById('next-actions-list'),
+        templateList: document.getElementById('template-list'),
+        biddersTableBody: document.getElementById('bidders-table-body'),
+        addBidderModal: document.getElementById('addBidderModal'),
+        manageBidderModal: document.getElementById('manageBidderModal'),
+        manageBidderModalContent: document.getElementById('manageBidderModalContent'),
+        templateModal: document.getElementById('templateModal'),
+        templateModalContent: document.getElementById('templateModalContent'),
+        availableDatesList: document.getElementById('available-dates-list'),
+        propertyList: document.getElementById('property-list'),
+        tabs: document.getElementById('tabs'),
+        tabContentContainer: document.getElementById('tab-content-container'),
+        metricsList: document.getElementById('metrics-list'),
+        metricDetailModal: document.getElementById('metricDetailModal'),
+        metricDetailModalContent: document.getElementById('metricDetailModalContent'),
+        propertyDetailModal: document.getElementById('propertyDetailModal'),
+        propertyDetailModalContent: document.getElementById('propertyDetailModalContent'),
+        howToUseModal: document.getElementById('howToUseModal')
+    };
+
+    // --- RENDER FUNCTIONS ---
+    const render = {
+        statusBadge: (status) => {
+            const statuses = { 'pendiente': 'status-pendiente', 'enviado': 'status-enviado', 'recibido': 'status-recibido', 'solicitada': 'status-enviado', 'confirmada': 'status-recibido' };
+            return `<span class="status-badge ${statuses[status] || 'status-pendiente'}">${status}</span>`;
+        },
+        progress: (bidder) => {
+            let completed = 0;
+            const total = 3; 
+            const visit = state.siteVisit.requests.find(r => r.bidderId === bidder.id);
+            if (bidder.profile.legalEntity && bidder.profile.cel) completed++;
+            if (bidder.docs.nda.status === 'recibido') completed++;
+            if (visit && visit.status === 'confirmada') completed++;
+            return Math.round((completed / total) * 100);
+        },
+        bidders: () => {
+            dom.biddersTableBody.innerHTML = state.bidders.map(b => {
+                const progress = render.progress(b);
+                const visitStatus = state.siteVisit.requests.find(r => r.bidderId === b.id);
+                return `
+                <tr class="hover:bg-gray-800">
+                    <td class="px-6 py-4"><div class="font-bold text-white">${b.name}</div><div class="text-xs text-gray-400">${b.company}</div></td>
+                    <td class="px-6 py-4"><div class="flex items-center gap-2"><div class="w-full progress-bar h-2"><div class="progress-bar-inner" style="width: ${progress}%"></div></div><span class="text-xs font-semibold">${progress}%</span></div></td>
+                    <td class="px-6 py-4 text-center">${render.statusBadge(b.docs.nda.status)}</td>
+                    <td class="px-6 py-4 text-center">${visitStatus ? render.statusBadge(visitStatus.status) : render.statusBadge('pendiente')}</td>
+                    <td class="px-6 py-4 text-center"><button class="btn btn-primary text-xs !py-1 !px-3" onclick="app.openManageModal(${b.id})">Gestionar</button></td>
+                </tr>`;
+            }).join('');
+            lucide.createIcons();
+        },
+        nextActions: () => {
+            let actions = [];
+            state.bidders.forEach(b => {
+                if (b.docs.nda.status === 'pendiente') actions.push({ text: `Enviar NDA a <strong>${b.company}</strong>.`, bidderId: b.id });
+                else if (b.docs.nda.status === 'enviado') actions.push({ text: `Dar seguimiento a NDA con <strong>${b.company}</strong>.`, bidderId: b.id });
+                const visit = state.siteVisit.requests.find(r => r.bidderId === b.id);
+                if (visit && visit.status === 'solicitada') actions.push({ text: `Confirmar visita con <strong>${b.company}</strong>.`, bidderId: b.id });
+            });
+            if (actions.length === 0) { dom.nextActionsList.innerHTML = `<p class="text-gray-400">No hay acciones críticas pendientes.</p>`; return; }
+            dom.nextActionsList.innerHTML = actions.map(action => `<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer" onclick="app.openManageModal(${action.bidderId})"><i data-lucide="alert-circle" class="w-5 h-5 text-yellow-400 flex-shrink-0"></i><p class="text-gray-300">${action.text}</p></div>`).join('');
+            lucide.createIcons();
+        },
+        availableDates: () => {
+            dom.availableDatesList.innerHTML = state.siteVisit.availableDates.map(date => `<li class="flex justify-between items-center bg-gray-800 p-2 rounded-md"><span>${new Date(date + 'T00:00:00').toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span><button onclick="app.removeVisitDate('${date}')" class="text-red-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button></li>`).join('');
+            lucide.createIcons();
+        },
+        templates: () => {
+            dom.templateList.innerHTML = state.templates.map(t => `<div class="flex justify-between items-center"><span class="font-medium text-sm">${t.name}</span><button class="btn btn-secondary text-xs" onclick="app.openTemplateModal('${t.id}')">Gestionar</button></div>`).join('');
+        },
+        properties: () => {
+            dom.propertyList.innerHTML = state.properties.map(p => `<a href="${p.gmapsUrl}" target="_blank" class="block p-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"><div class="flex items-center justify-between"><div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"></i><div><p class="font-semibold text-white">${p.name}</p><p class="text-sm text-gray-400">${p.detail}</p></div></div><i data-lucide="external-link" class="w-4 h-4 text-gray-500"></i></div></a>`).join('');
+            lucide.createIcons();
+        },
+        metrics: () => {
+            dom.metricsList.innerHTML = state.metrics.map(m => {
+                if (m.type === 'header') return `<h3 class="text-md font-semibold text-gray-400 pt-2">${m.label}</h3>`;
+                if (m.type === 'divider') return `<hr class="my-2 border-gray-700">`;
+                return `<div class="metric-item p-3" onclick="app.openMetricDetailModal('${m.id}')"><div class="flex items-center gap-4"><div class="bg-gray-700 p-2 rounded-full"><i data-lucide="${m.icon}" class="w-6 h-6 text-blue-400"></i></div><div><p class="text-sm text-gray-400">${m.name}</p><p class="font-bold text-lg text-white">${m.value}</p></div></div></div>`
+            }).join('');
+            lucide.createIcons();
+        },
+        all: () => {
+            render.templates();
+            render.bidders();
+            render.availableDates();
+            render.nextActions();
+            render.properties();
+            render.metrics();
+        }
+    };
+
+    // --- MODAL CONTROLLERS ---
+    const openModal = (modal) => modal.classList.remove('hidden');
+    const closeModal = (modal) => modal.classList.add('hidden');
+
+    // --- GLOBAL APP OBJECT for inline event handlers ---
+    window.app = {
+        openMetricDetailModal: (metricId) => {
+            const metric = state.metrics.find(m => m.id === metricId);
+            if (!metric || !metric.details) return;
+
+            let detailContent = '';
+            if (metric.details.type === 'list') {
+                detailContent = `<ul class="space-y-2 text-sm">` +
+                    metric.details.items.map(item => `<li class="flex justify-between"><span>${item.label}:</span><span class="font-semibold text-white">${item.value}</span></li>`).join('') +
+                    `</ul>`;
+            } else if (metric.details.type === 'gla-breakdown') {
+                 detailContent = `<ul class="space-y-2 text-sm">` +
+                    state.properties.map(p => `<li class="flex justify-between items-center p-2 rounded-md hover:bg-gray-800 cursor-pointer" onclick="app.openPropertyDetailModal(${p.id})"><span>${p.name}:</span><span class="font-semibold text-white">${p.detail}</span></li>`).join('') +
+                    `</ul>`;
+            } else if (metric.details.type === 'note') {
+                detailContent = `<p class="text-sm text-gray-300">${metric.details.content}</p>`;
+            } else if (metric.details.type === 'interactive-noi') {
+                detailContent = `<div class="space-y-4"><div><label class="text-sm font-medium text-gray-400">Renta de Mercado Estimada (USD/ft²)</label><div class="flex items-center gap-2 mt-1"><button class="btn btn-secondary !p-2" onclick="app.adjustRent(-0.01)"><i data-lucide="minus" class="w-4 h-4"></i></button><input type="number" step="0.01" id="market-rent-input" class="input-dark text-center" value="${metric.details.defaultMarketRent.toFixed(2)}" onchange="app.updateInteractiveNoi()"><button class="btn btn-secondary !p-2" onclick="app.adjustRent(0.01)"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div><div class="border-t border-gray-700 pt-4"><h5 class="font-semibold text-white mb-2">Desglose de Ingresos Anuales</h5><table class="w-full text-sm"><tbody id="noi-breakdown-table"></tbody><tfoot><tr class="border-t-2 border-gray-600"><td class="pt-2 font-bold text-white">NOI Total Proyectado</td><td class="pt-2 font-bold text-white text-right" id="noi-total-display"></td></tr></tfoot></table></div></div>`;
+            }
+
+            dom.metricDetailModalContent.innerHTML = `<div class="flex justify-between items-center mb-4"><h3 class="text-xl font-bold text-white">${metric.details.title}</h3><button onclick="app.closeMetricDetailModal()" class="p-1 rounded-full hover:bg-gray-700"><i data-lucide="x" class="w-5 h-5 text-gray-400"></i></button></div><div>${detailContent}</div>`;
+            lucide.createIcons();
+            if (metric.details.type === 'interactive-noi') app.updateInteractiveNoi();
+            openModal(dom.metricDetailModal);
+        },
+        closeMetricDetailModal: () => closeModal(dom.metricDetailModal),
+        openPropertyDetailModal: (propertyId) => {
+            const property = state.properties.find(p => p.id === propertyId);
+            if (!property) return;
+            
+            let content = '';
+            if (property.id === 3) { // VLINK Special Case
+                content = `
+                <div class="p-6 border-b border-gray-700"><h3 class="text-xl font-bold text-white">Análisis Pro-Forma: ${property.name}</h3></div>
+                <div class="p-6 space-y-4">
+                    <p class="text-sm text-gray-300">Este es un proyecto Build-to-Suit (BTS) con entrega y estabilización proyectada para <strong>Octubre 2026</strong>.</p>
+                    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+                        <h4 class="font-semibold text-white mb-2">Estrategia de Renta de Salida:</h4>
+                        <p class="text-sm">La renta se proyecta utilizando la tasa de mercado actual, más un ajuste por la inflación esperada (USCPI) durante los próximos 12 meses para capturar el valor al momento de la entrega.</p>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div><p class="text-xs text-gray-400">Renta Mercado Hoy</p><p class="font-bold text-lg text-white">$0.75 /ft²</p></div>
+                            <div><i data-lucide="plus" class="mx-auto h-5 w-5 text-gray-500"></i></div>
+                            <div><p class="text-xs text-gray-400">USCPI (Estimado 12m)</p><p class="font-bold text-lg text-white">2.5%</p></div>
+                        </div>
+                        <div class="mt-4 border-t border-gray-700 pt-4 text-center">
+                             <p class="text-sm text-gray-400">Renta Proyectada (Oct 2026)</p>
+                             <p class="text-2xl font-bold text-blue-400">$${(0.75 * 1.025).toFixed(2)} /ft²</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end">
+                    <button class="btn btn-secondary" onclick="app.closePropertyDetailModal()">Cerrar</button>
+                </div>
+                `;
+            } else {
+                 content = `
+                <div class="p-6 border-b border-gray-700"><h3 class="text-xl font-bold text-white">Rent Roll: ${property.name}</h3></div>
+                <div class="p-6">
+                    <table class="w-full text-sm text-left"><thead class="text-xs text-gray-400 uppercase"><tr><th class="pb-3">Inquilino</th><th class="pb-3">Área</th><th class="pb-3">Renta Actual</th><th class="pb-3">Expira</th><th class="pb-3">Escalación</th><th class="pb-3">Tipo</th></tr></thead>
+                        <tbody class="divide-y divide-gray-700">
+                        ${property.tenants.map(t => `<tr><td class="py-2 font-semibold text-white">${t.name}</td><td>${t.gla}</td><td>${t.rent}</td><td>${t.expiration}</td><td>${t.escalation}</td><td><span class="font-mono text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">${t.type}</span></td></tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                 <div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end">
+                    <button class="btn btn-secondary" onclick="app.closePropertyDetailModal()">Cerrar</button>
+                </div>`;
+            }
+            dom.propertyDetailModalContent.innerHTML = content;
+            lucide.createIcons();
+            openModal(dom.propertyDetailModal);
+        },
+        closePropertyDetailModal: () => closeModal(dom.propertyDetailModal),
+        // ... other functions
+    };
+
+    // --- EVENT LISTENERS ---
+    document.getElementById('addBidderBtn').addEventListener('click', () => openModal(dom.addBidderModal));
+    document.getElementById('cancelAddBidder').addEventListener('click', () => closeModal(dom.addBidderModal));
+    document.getElementById('howToUseBtn').addEventListener('click', () => openModal(dom.howToUseModal));
+    document.getElementById('closeHowToUse').addEventListener('click', () => closeModal(dom.howToUseModal));
+    
+    document.getElementById('add-visit-date-btn').addEventListener('click', () => {
+        const dateInput = document.getElementById('visit-date-input');
+        if (dateInput.value && !state.siteVisit.availableDates.includes(dateInput.value)) {
+            state.siteVisit.availableDates.push(dateInput.value);
+            state.siteVisit.availableDates.sort();
+            render.availableDates();
+            dateInput.value = '';
+        }
+    });
+    
+    document.getElementById('addBidderForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newBidder = {
+            id: Date.now(),
+            name: document.getElementById('bidderName').value,
+            company: document.getElementById('bidderCompany').value,
+            docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' } },
+            profile: { email: document.getElementById('bidderEmail').value, password: generatePassword(), cel: '', oficina: '', legalEntity: '', legalRep: '', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }
+        };
+        state.bidders.push(newBidder);
+        render.all();
+        closeModal(dom.addBidderModal);
+        e.target.reset();
+    });
+
+    dom.tabs.addEventListener('click', (e) => {
+        if (e.target.matches('button[data-tab]')) {
+            const tabId = e.target.dataset.tab;
+            dom.tabs.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            dom.tabContentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabId}-content`).classList.add('active');
+        }
+    });
+
+    // --- INITIAL RENDER ---
+    render.all();
+});
+</script>
+
+</body>
+</html>
