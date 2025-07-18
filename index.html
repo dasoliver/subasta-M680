@@ -1,481 +1,531 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2575.6">
-  <style type="text/css">
-    body {background-color: #05090d}
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #5a5a5a; -webkit-text-stroke: #5a5a5a; background-color: #e7edf5}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px Menlo; color: #5a5a5a; -webkit-text-stroke: #5a5a5a; background-color: #e7edf5; min-height: 16.0px}
-    span.s1 {font-kerning: none}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Centro de Mando: Licitación PMT-680</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #030712; color: #9ca3af; }
+        .card { background-color: #111827; border: 1px solid #374151; border-radius: 0.75rem; }
+        .btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; }
+        .btn:disabled { cursor: not-allowed; opacity: 0.5; }
+        .btn-primary { background-color: #2563eb; color: white; }
+        .btn-primary:hover:not(:disabled) { background-color: #1d4ed8; }
+        .btn-secondary { background-color: #374151; color: #d1d5db; }
+        .btn-secondary:hover:not(:disabled) { background-color: #4b5563; }
+        .modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.8); z-index: 40; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }
+        .modal-content { background-color: #1f2937; border: 1px solid #374151; padding: 0; border-radius: 0.75rem; width: 90%; max-width: 800px; z-index: 50; transform: scale(0.95); transition: transform 0.3s ease; overflow: hidden; }
+        .modal-backdrop:not(.hidden) .modal-content { transform: scale(1); }
+        .status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }
+        .status-pendiente { background-color: #4a3a19; color: #fef3c7; }
+        .status-enviado { background-color: #1e3a8a; color: #dbeafe; }
+        .status-recibido { background-color: #064e3b; color: #d1fae5; }
+        .input-dark { background-color: #374151; border: 1px solid #4b5563; color: #d1d5db; border-radius: 0.375rem; padding: 0.5rem 0.75rem; width: 100%; }
+        .input-dark:focus { outline: none; border-color: #2563eb; ring: 1px; ring-color: #2563eb; }
+        .progress-bar { background-color: #374151; border-radius: 9999px; overflow: hidden; }
+        .progress-bar-inner { background-color: #2563eb; height: 100%; transition: width 0.5s ease-in-out; }
+        .tab { padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; color: #6b7280; font-weight: 600; }
+        .tab.active { border-bottom-color: #2563eb; color: #eff6ff; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .metric-item { cursor: pointer; transition: background-color 0.2s ease; border-radius: 0.5rem; }
+        .metric-item:hover { background-color: #374151; }
+    </style>
 </head>
-<body>
-<p class="p1"><span class="s1">&lt;!DOCTYPE html&gt;</span></p>
-<p class="p1"><span class="s1">&lt;html lang="es"&gt;</span></p>
-<p class="p1"><span class="s1">&lt;head&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;title&gt;Centro de Mando: Licitación PMT-680&lt;/title&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;script src="https://unpkg.com/lucide@latest"&gt;&lt;/script&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;style&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>body { font-family: 'Inter', sans-serif; background-color: #030712; color: #9ca3af; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.card { background-color: #111827; border: 1px solid #374151; border-radius: 0.75rem; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; cursor: pointer; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn:disabled { cursor: not-allowed; opacity: 0.5; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-primary { background-color: #2563eb; color: white; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-primary:hover:not(:disabled) { background-color: #1d4ed8; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-secondary { background-color: #374151; color: #d1d5db; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.btn-secondary:hover:not(:disabled) { background-color: #4b5563; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.modal-backdrop { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0,0,0,0.8); z-index: 40; display: flex; align-items: center; justify-content: center; transition: opacity 0.3s ease; backdrop-filter: blur(4px); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.modal-content { background-color: #1f2937; border: 1px solid #374151; padding: 0; border-radius: 0.75rem; width: 90%; max-width: 800px; z-index: 50; transform: scale(0.95); transition: transform 0.3s ease; overflow: hidden; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.modal-backdrop:not(.hidden) .modal-content { transform: scale(1); }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-badge { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-pendiente { background-color: #4a3a19; color: #fef3c7; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-enviado { background-color: #1e3a8a; color: #dbeafe; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.status-recibido { background-color: #064e3b; color: #d1fae5; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.input-dark { background-color: #374151; border: 1px solid #4b5563; color: #d1d5db; border-radius: 0.375rem; padding: 0.5rem 0.75rem; width: 100%; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.input-dark:focus { outline: none; border-color: #2563eb; ring: 1px; ring-color: #2563eb; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.progress-bar { background-color: #374151; border-radius: 9999px; overflow: hidden; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.progress-bar-inner { background-color: #2563eb; height: 100%; transition: width 0.5s ease-in-out; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tab { padding: 0.5rem 1rem; cursor: pointer; border-bottom: 2px solid transparent; color: #6b7280; font-weight: 600; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tab.active { border-bottom-color: #2563eb; color: #eff6ff; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tab-content { display: none; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.tab-content.active { display: block; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.metric-item { cursor: pointer; transition: background-color 0.2s ease; border-radius: 0.5rem; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>.metric-item:hover { background-color: #374151; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/head&gt;</span></p>
-<p class="p1"><span class="s1">&lt;body class="p-4 md:p-8"&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="app" class="max-w-screen-xl mx-auto"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- HEADER --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;header class="mb-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex flex-col md:flex-row justify-between items-start md:items-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;h1 class="text-3xl font-extrabold text-white"&gt;Centro de Mando: Licitación PMT-680&lt;/h1&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-gray-400 mt-1"&gt;Plataforma de Gestión Estratégica para Grupo MUSA.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="mt-4 md:mt-0 flex gap-2"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button id="howToUseBtn" class="btn btn-secondary"&gt;&lt;i data-lucide="help-circle" class="w-4 h-4"&gt;&lt;/i&gt;Cómo Usar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button id="addBidderBtn" class="btn btn-primary"&gt;&lt;i data-lucide="user-plus" class="w-4 h-4"&gt;&lt;/i&gt;Añadir Licitante&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/header&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- TABS --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="border-b border-gray-700 mb-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;nav class="flex -mb-px" id="tabs"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button data-tab="dashboard" class="tab active"&gt;Dashboard&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button data-tab="dataroom" class="tab"&gt;Data Room&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button data-tab="config" class="tab"&gt;Configuración&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/nav&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;!-- TAB CONTENT --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="tab-content-container"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- DASHBOARD TAB --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="dashboard-content" class="tab-content active"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;main class="grid grid-cols-1 lg:grid-cols-4 gap-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-1 space-y-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="card p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"&gt;&lt;i data-lucide="target" class="text-blue-500"&gt;&lt;/i&gt;Próximos Pasos&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div id="next-actions-list" class="space-y-3 text-sm"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                         </span>&lt;div class="card p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"&gt;&lt;i data-lucide="bar-chart-3" class="text-blue-500"&gt;&lt;/i&gt;Dashboard Ejecutivo&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div id="metrics-list" class="space-y-1 text-gray-300"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="lg:col-span-3"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="card overflow-hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="p-6"&gt;&lt;h2 class="text-xl font-bold text-white flex items-center gap-2"&gt;&lt;i data-lucide="users" class="text-blue-500"&gt;&lt;/i&gt;Panel de Licitantes&lt;/h2&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div class="overflow-x-auto"&gt;&lt;table class="w-full text-sm text-left text-gray-400"&gt;&lt;thead class="text-xs text-gray-300 uppercase bg-gray-700"&gt;&lt;tr&gt;&lt;th scope="col" class="px-6 py-3"&gt;Licitante&lt;/th&gt;&lt;th scope="col" class="px-6 py-3 w-1/4"&gt;Progreso&lt;/th&gt;&lt;th scope="col" class="px-6 py-3 text-center"&gt;NDA&lt;/th&gt;&lt;th scope="col" class="px-6 py-3 text-center"&gt;Visita&lt;/th&gt;&lt;th scope="col" class="px-6 py-3 text-center"&gt;Acciones&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody id="bidders-table-body" class="divide-y divide-gray-700"&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/main&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- DATA ROOM TAB --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="dataroom-content" class="tab-content"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;main class="grid grid-cols-1 lg:grid-cols-2 gap-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"&gt;&lt;i data-lucide="building-2" class="text-blue-500"&gt;&lt;/i&gt;Activos en Licitación&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div id="property-list" class="space-y-2"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"&gt;&lt;i data-lucide="folder-kanban" class="text-blue-500"&gt;&lt;/i&gt;Documentos Base (VDR)&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div id="template-list" class="space-y-4"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;/main&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;!-- CONFIG TAB --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div id="config-content" class="tab-content"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;main class="grid grid-cols-1 lg:grid-cols-2 gap-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="card p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"&gt;&lt;i data-lucide="calendar-days" class="text-blue-500"&gt;&lt;/i&gt;Gestión de Visitas a Sitio&lt;/h2&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div id="site-visits-admin" class="space-y-3"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;p class="text-sm text-gray-400"&gt;Define las fechas disponibles para que los licitantes soliciten una visita.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;input type="date" id="visit-date-input" class="input-dark w-full"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;button id="add-visit-date-btn" class="btn btn-secondary w-full text-sm"&gt;Añadir Fecha&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;ul id="available-dates-list" class="text-sm space-y-1 mt-2"&gt;&lt;/ul&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/main&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;!-- MODALS --&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="metricDetailModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="metricDetailModalContent" class="modal-content !max-w-3xl p-6"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="propertyDetailModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="propertyDetailModalContent" class="modal-content !max-w-4xl"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="addBidderModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="modal-content"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;h3 class="text-xl font-bold text-white mb-4"&gt;Añadir Nuevo Licitante&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;form id="addBidderForm" class="space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;&lt;label for="bidderName" class="block text-sm font-medium text-gray-300"&gt;Nombre del Licitante / Contacto&lt;/label&gt;&lt;input type="text" id="bidderName" class="input-dark mt-1" required&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;&lt;label for="bidderEmail" class="block text-sm font-medium text-gray-300"&gt;Email (será su usuario)&lt;/label&gt;&lt;input type="email" id="bidderEmail" class="input-dark mt-1" required&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div&gt;&lt;label for="bidderCompany" class="block text-sm font-medium text-gray-300"&gt;Empresa / Fondo&lt;/label&gt;&lt;input type="text" id="bidderCompany" class="input-dark mt-1" required&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="flex justify-end gap-3 pt-4"&gt;&lt;button type="button" id="cancelAddBidder" class="btn btn-secondary"&gt;Cancelar&lt;/button&gt;&lt;button type="submit" class="btn btn-primary"&gt;Guardar Licitante&lt;/button&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/form&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="howToUseModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div class="modal-content p-8"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;h3 class="text-xl font-bold text-white mb-4"&gt;Cómo Usar esta Herramienta&lt;/h3&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="space-y-4 text-gray-300"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;p&gt;&lt;strong&gt;Paso 1: Explora el Dashboard.&lt;/strong&gt; Haz clic en cualquier métrica del "Dashboard Ejecutivo" para ver un desglose detallado. Para el NOI 2026, puedes modelar escenarios cambiando la renta de mercado.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p&gt;&lt;strong&gt;Paso 2: Gestiona Licitantes.&lt;/strong&gt; Haz clic en "Gestionar" en la fila de un licitante. Completa su "Razón Social" y "Representante Legal" para que los contratos se generen correctamente.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;p&gt;&lt;strong&gt;Paso 3: Genera y Envía el NDA.&lt;/strong&gt; Dentro del panel de gestión, haz clic en "Enviar" junto al NDA para abrir el generador. Revisa el documento poblado y márcalo como enviado.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;div class="flex justify-end mt-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;button id="closeHowToUse" class="btn btn-primary"&gt;Entendido&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="manageBidderModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="manageBidderModalContent" class="modal-content"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;div id="templateModal" class="modal-backdrop hidden"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>&lt;div id="templateModalContent" class="modal-content !max-w-4xl"&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;script&gt;</span></p>
-<p class="p1"><span class="s1">document.addEventListener('DOMContentLoaded', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>lucide.createIcons();</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- HELPER FUNCTIONS ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const generatePassword = (length = 10) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>let password = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>for (let i = 0; i &lt; length; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>return password;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const formatCurrency = (value) =&gt; new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- STATE MANAGEMENT ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const state = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>properties: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 1, name: 'CEDIS Vía Rápida', detail: '359,628 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&amp;query=F38F%2BRW', tenants: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ name: 'SEARS', gla: '176,248 Sq Ft', rent: '$0.70/ft²', expiration: 'Ago 2029', escalation: 'CPI Anual', type: 'NNN' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ name: 'CECSO', gla: '183,380 Sq Ft', rent: '$0.51/ft²', expiration: 'Abr 2026', escalation: '2% Fijo Anual', type: 'NNN' }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>]},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 2, name: 'Waldo’s Lago', detail: '275,109 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&amp;query=G337%2BJ4', tenants: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ name: 'Rogers Foam', gla: '162,557 Sq Ft', rent: '$1.02/ft²', expiration: 'Feb 2028', escalation: '4% Fijo Anual', type: 'NNN' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ name: 'Dragon Trade', gla: '37,325 Sq Ft', rent: '$0.95/ft²', expiration: 'Jun 2034', escalation: 'CPI (USA)', type: 'NNN' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>{ name: 'Seacon Global', gla: '75,227 Sq Ft', rent: '$0.77/ft²', expiration: 'Oct 2025', escalation: '3% Anual', type: 'NNN' }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>]},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 3, name: 'VLINK Estación García', detail: '43,700 Sq Ft (BTS)', gmapsUrl: 'https://www.google.com/maps/search/?api=1&amp;query=F38C%2B9W6', tenants: [] }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>metrics: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'header', label: 'Métricas del Portafolio' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'metric', id: 'gla', name: 'GLA Total', value: '678,437 Sq Ft', icon: 'maximize', details: { title: 'Desglose de GLA Total', type: 'gla-breakdown' } },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'metric', id: 'noi2025', name: 'NOI Actual (2025)', value: 'US $4.79 MM', icon: 'trending-up', details: { title: 'Desglose de NOI Actual (2025)', type: 'list', items: [ { label: 'CEDIS Vía Rápida', value: formatCurrency(2325250) }, { label: 'Waldo’s Lago', value: formatCurrency(2468049) }, { label: 'VLINK Estación García', value: formatCurrency(0) } ] } },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'metric', id: 'noi2026', name: 'NOI (Expected 2026)', value: 'US $5.58 MM', icon: 'trending-up', details: {<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>title: 'Modelo Interactivo NOI 2026',<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>type: 'interactive-noi',<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>defaultMarketRent: 0.75,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>components: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'SEARS', gla: 176248, rate: 0.71, isMarketRate: false },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'CECSO', gla: 183380, rate: 0.52, isMarketRate: false },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'Rogers Foam', gla: 162557, rate: 1.06, isMarketRate: false },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'Dragon Trade', gla: 37325, rate: 0.97, isMarketRate: false },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'Seacon Global', gla: 75227, isMarketRate: true },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>{ label: 'VLINK (3 meses)', gla: 43700, months: 3, isMarketRate: true }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>]</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'divider' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'header', label: 'Indicadores de Mercado (Tijuana Q1 2025)' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ type: 'metric', id: 'vacancy', name: 'Vacancia Reportada', value: '5.91%', icon: 'home', details: { title: 'Análisis de Vacancia', type: 'note', content: 'La vacancia reportada del 5.91% (con una vacancia efectiva cercana al 7.8%) indica una normalización del mercado post-pandemia. Esto crea una ventana de oportunidad para vender activos estabilizados antes de que la nueva oferta presione las rentas a la baja.' } },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>templates: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 'nda', name: 'Acuerdo de Confidencialidad (NDA)', content: `CONVENIO DE CONFIDENCIALIDAD QUE CELEBRAN POR UNA PARTE PROYECTOS Y CONSTRUCCIONES MUSA, S.A. DE C.V., REPRESENTADA POR MARTHA ALICIA FUENTES GARCÍA Y [RAZON_SOCIAL_RECEPTOR], REPRESENTADA POR [NOMBRE_REP_LEGAL_RECEPTOR], Y QUE EN LO SUCESIVO, CONJUNTAMENTE SE DENOMINAN COMO LAS “PARTES” E INDISTINTAMENTE COMO LA “PARTE”, CONVENIO QUE SE REGIRÁ AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: ...[RESTO DEL TEXTO DEL NDA]` },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 'bases', name: 'Bases de Licitación', content: '' },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 'oferta', name: 'Formato de Oferta Económica', content: '' }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>siteVisit: {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>availableDates: [],</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>requests: []<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>bidders: [</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 1, name: 'Jorge Girault', company: 'FIBRA Prologis', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'jgirault@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'FIBRA Prologis, S. de R.L. de C.V.', legalRep: 'Jorge Girault', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 2, name: 'Álvaro Rodríguez', company: 'FIBRA Macquarie', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'arodriguez@macquarie.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Macquarie Mexican REIT', legalRep: 'Álvaro Rodríguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 3, name: 'Rogelio Jiménez', company: 'FIBRA Monterrey (FMTY)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rjimenez@fibramty.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Fibra MTY, S.A.P.I. de C.V.', legalRep: 'Rogelio Jiménez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 4, name: 'Sergio Argüelles', company: 'FIBRA Terrafina', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'sarguelles@terrafina.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Terrafina, S.A.B. de C.V.', legalRep: 'Sergio Argüelles', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 5, name: 'Gustavo Tomé', company: 'Corporate Properties of the Americas (CPA)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'gtome@cpamericas.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'CPA SERVICIOS, S. DE R.L. DE C.V.', legalRep: 'Gustavo Tomé', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 6, name: 'Lorenzo Dominique', company: 'Vesta (NYSE VTMX)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ldominique@vesta.com.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Corporación Inmobiliaria Vesta, S.A.B. de C.V.', legalRep: 'Lorenzo Dominique', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 7, name: 'Francisco Garza', company: 'Grupo GP / GP Desarrollos', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'fgarza@grupogp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GP Desarrollos, S.A. de C.V.', legalRep: 'Francisco Garza', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 8, name: 'Ignacio Pérez', company: 'STIVA', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'iperez@stiva.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'STIVA, S.A. de C.V.', legalRep: 'Ignacio Pérez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 9, name: 'Mark Hansen', company: 'Prologis Inc. (NYSE PLD)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'mhansen@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Prologis, Inc.', legalRep: 'Mark Hansen', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 10, name: 'Carlos Flores', company: 'Blackstone RE (BREIT / BREP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'cflores@blackstone.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Blackstone Real Estate', legalRep: 'Carlos Flores', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 11, name: 'Ramiro Cepeda', company: 'Brookfield AM', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rcepeda@brookfield.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Brookfield Asset Management', legalRep: 'Ramiro Cepeda', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 12, name: 'Adrián Teo', company: 'GIC (Singapur)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ateo@gic.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GIC Private Limited', legalRep: 'Adrián Teo', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 13, name: 'Khalid Al-Ghamdi', company: 'PIF (Arabia Saudí)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'kalghamdi@pif.gov.sa', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Public Investment Fund', legalRep: 'Khalid Al-Ghamdi', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 14, name: 'Adolfo Riveroll', company: 'JD Property (JDP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ariveroll@jd.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'JD Property', legalRep: 'Adolfo Riveroll', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 15, name: 'Chong Keh', company: 'Mapletree Logistics Trust (MLT)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ckeh@mapletree.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Mapletree Logistics Trust Management Ltd.', legalRep: 'Chong Keh', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 16, name: 'Tomás Cha', company: 'GLP Capital Partners', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'tcha@glp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GLP Capital Partners', legalRep: 'Tomás Cha', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 17, name: 'Richard Tse', company: 'ESR', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rtse@esr.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'ESR Group Limited', legalRep: 'Richard Tse', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>{ id: 18, name: 'Oliver Rodriguez', company: 'Vlads Capital', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'oliver@vladscapital.com', password: generatePassword(), cel: '6641553525', oficina: '', legalEntity: 'Vlads Capital, S.A.P.I. de C.V.', legalRep: 'Oliver Rodriguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>]</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- DOM ELEMENT REFERENCES ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const dom = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>nextActionsList: document.getElementById('next-actions-list'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>templateList: document.getElementById('template-list'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>biddersTableBody: document.getElementById('bidders-table-body'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>addBidderModal: document.getElementById('addBidderModal'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>manageBidderModal: document.getElementById('manageBidderModal'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>manageBidderModalContent: document.getElementById('manageBidderModalContent'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>templateModal: document.getElementById('templateModal'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>templateModalContent: document.getElementById('templateModalContent'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>availableDatesList: document.getElementById('available-dates-list'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>propertyList: document.getElementById('property-list'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>tabs: document.getElementById('tabs'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>tabContentContainer: document.getElementById('tab-content-container'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>metricsList: document.getElementById('metrics-list'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>metricDetailModal: document.getElementById('metricDetailModal'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>metricDetailModalContent: document.getElementById('metricDetailModalContent'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>propertyDetailModal: document.getElementById('propertyDetailModal'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>propertyDetailModalContent: document.getElementById('propertyDetailModalContent'),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>howToUseModal: document.getElementById('howToUseModal')</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- RENDER FUNCTIONS ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const render = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>statusBadge: (status) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const statuses = { 'pendiente': 'status-pendiente', 'enviado': 'status-enviado', 'recibido': 'status-recibido', 'solicitada': 'status-enviado', 'confirmada': 'status-recibido' };</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return `&lt;span class="status-badge ${statuses[status] || 'status-pendiente'}"&gt;${status}&lt;/span&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>progress: (bidder) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let completed = 0;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const total = 3;<span class="Apple-converted-space"> </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const visit = state.siteVisit.requests.find(r =&gt; r.bidderId === bidder.id);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (bidder.profile.legalEntity &amp;&amp; bidder.profile.cel) completed++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (bidder.docs.nda.status === 'recibido') completed++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (visit &amp;&amp; visit.status === 'confirmada') completed++;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>return Math.round((completed / total) * 100);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>bidders: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.biddersTableBody.innerHTML = state.bidders.map(b =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const progress = render.progress(b);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const visitStatus = state.siteVisit.requests.find(r =&gt; r.bidderId === b.id);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;tr class="hover:bg-gray-800"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td class="px-6 py-4"&gt;&lt;div class="font-bold text-white"&gt;${b.name}&lt;/div&gt;&lt;div class="text-xs text-gray-400"&gt;${b.company}&lt;/div&gt;&lt;/td&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td class="px-6 py-4"&gt;&lt;div class="flex items-center gap-2"&gt;&lt;div class="w-full progress-bar h-2"&gt;&lt;div class="progress-bar-inner" style="width: ${progress}%"&gt;&lt;/div&gt;&lt;/div&gt;&lt;span class="text-xs font-semibold"&gt;${progress}%&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td class="px-6 py-4 text-center"&gt;${render.statusBadge(b.docs.nda.status)}&lt;/td&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td class="px-6 py-4 text-center"&gt;${visitStatus ? render.statusBadge(visitStatus.status) : render.statusBadge('pendiente')}&lt;/td&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;td class="px-6 py-4 text-center"&gt;&lt;button class="btn btn-primary text-xs !py-1 !px-3" onclick="app.openManageModal(${b.id})"&gt;Gestionar&lt;/button&gt;&lt;/td&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/tr&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>nextActions: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let actions = [];</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state.bidders.forEach(b =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (b.docs.nda.status === 'pendiente') actions.push({ text: `Enviar NDA a &lt;strong&gt;${b.company}&lt;/strong&gt;.`, bidderId: b.id });</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>else if (b.docs.nda.status === 'enviado') actions.push({ text: `Dar seguimiento a NDA con &lt;strong&gt;${b.company}&lt;/strong&gt;.`, bidderId: b.id });</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>const visit = state.siteVisit.requests.find(r =&gt; r.bidderId === b.id);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (visit &amp;&amp; visit.status === 'solicitada') actions.push({ text: `Confirmar visita con &lt;strong&gt;${b.company}&lt;/strong&gt;.`, bidderId: b.id });</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>});</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (actions.length === 0) { dom.nextActionsList.innerHTML = `&lt;p class="text-gray-400"&gt;No hay acciones críticas pendientes.&lt;/p&gt;`; return; }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.nextActionsList.innerHTML = actions.map(action =&gt; `&lt;div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer" onclick="app.openManageModal(${action.bidderId})"&gt;&lt;i data-lucide="alert-circle" class="w-5 h-5 text-yellow-400 flex-shrink-0"&gt;&lt;/i&gt;&lt;p class="text-gray-300"&gt;${action.text}&lt;/p&gt;&lt;/div&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>availableDates: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.availableDatesList.innerHTML = state.siteVisit.availableDates.map(date =&gt; `&lt;li class="flex justify-between items-center bg-gray-800 p-2 rounded-md"&gt;&lt;span&gt;${new Date(date + 'T00:00:00').toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}&lt;/span&gt;&lt;button onclick="app.removeVisitDate('${date}')" class="text-red-400 hover:text-red-600"&gt;&lt;i data-lucide="trash-2" class="w-4 h-4"&gt;&lt;/i&gt;&lt;/button&gt;&lt;/li&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>templates: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.templateList.innerHTML = state.templates.map(t =&gt; `&lt;div class="flex justify-between items-center"&gt;&lt;span class="font-medium text-sm"&gt;${t.name}&lt;/span&gt;&lt;button class="btn btn-secondary text-xs" onclick="app.openTemplateModal('${t.id}')"&gt;Gestionar&lt;/button&gt;&lt;/div&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>properties: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.propertyList.innerHTML = state.properties.map(p =&gt; `&lt;a href="${p.gmapsUrl}" target="_blank" class="block p-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"&gt;&lt;div class="flex items-center justify-between"&gt;&lt;div class="flex items-start gap-3"&gt;&lt;i data-lucide="map-pin" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"&gt;&lt;/i&gt;&lt;div&gt;&lt;p class="font-semibold text-white"&gt;${p.name}&lt;/p&gt;&lt;p class="text-sm text-gray-400"&gt;${p.detail}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;i data-lucide="external-link" class="w-4 h-4 text-gray-500"&gt;&lt;/i&gt;&lt;/div&gt;&lt;/a&gt;`).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>metrics: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.metricsList.innerHTML = state.metrics.map(m =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (m.type === 'header') return `&lt;h3 class="text-md font-semibold text-gray-400 pt-2"&gt;${m.label}&lt;/h3&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>if (m.type === 'divider') return `&lt;hr class="my-2 border-gray-700"&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>return `&lt;div class="metric-item p-3" onclick="app.openMetricDetailModal('${m.id}')"&gt;&lt;div class="flex items-center gap-4"&gt;&lt;div class="bg-gray-700 p-2 rounded-full"&gt;&lt;i data-lucide="${m.icon}" class="w-6 h-6 text-blue-400"&gt;&lt;/i&gt;&lt;/div&gt;&lt;div&gt;&lt;p class="text-sm text-gray-400"&gt;${m.name}&lt;/p&gt;&lt;p class="font-bold text-lg text-white"&gt;${m.value}&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;`</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}).join('');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>all: () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.templates();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.bidders();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.availableDates();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.nextActions();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.properties();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.metrics();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- MODAL CONTROLLERS ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const openModal = (modal) =&gt; modal.classList.remove('hidden');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>const closeModal = (modal) =&gt; modal.classList.add('hidden');</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- GLOBAL APP OBJECT for inline event handlers ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>window.app = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>openMetricDetailModal: (metricId) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const metric = state.metrics.find(m =&gt; m.id === metricId);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!metric || !metric.details) return;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let detailContent = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (metric.details.type === 'list') {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>detailContent = `&lt;ul class="space-y-2 text-sm"&gt;` +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>metric.details.items.map(item =&gt; `&lt;li class="flex justify-between"&gt;&lt;span&gt;${item.label}:&lt;/span&gt;&lt;span class="font-semibold text-white"&gt;${item.value}&lt;/span&gt;&lt;/li&gt;`).join('') +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>`&lt;/ul&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (metric.details.type === 'gla-breakdown') {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>detailContent = `&lt;ul class="space-y-2 text-sm"&gt;` +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>state.properties.map(p =&gt; `&lt;li class="flex justify-between items-center p-2 rounded-md hover:bg-gray-800 cursor-pointer" onclick="app.openPropertyDetailModal(${p.id})"&gt;&lt;span&gt;${p.name}:&lt;/span&gt;&lt;span class="font-semibold text-white"&gt;${p.detail}&lt;/span&gt;&lt;/li&gt;`).join('') +</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>`&lt;/ul&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (metric.details.type === 'note') {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>detailContent = `&lt;p class="text-sm text-gray-300"&gt;${metric.details.content}&lt;/p&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else if (metric.details.type === 'interactive-noi') {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>detailContent = `&lt;div class="space-y-4"&gt;&lt;div&gt;&lt;label class="text-sm font-medium text-gray-400"&gt;Renta de Mercado Estimada (USD/ft²)&lt;/label&gt;&lt;div class="flex items-center gap-2 mt-1"&gt;&lt;button class="btn btn-secondary !p-2" onclick="app.adjustRent(-0.01)"&gt;&lt;i data-lucide="minus" class="w-4 h-4"&gt;&lt;/i&gt;&lt;/button&gt;&lt;input type="number" step="0.01" id="market-rent-input" class="input-dark text-center" value="${metric.details.defaultMarketRent.toFixed(2)}" onchange="app.updateInteractiveNoi()"&gt;&lt;button class="btn btn-secondary !p-2" onclick="app.adjustRent(0.01)"&gt;&lt;i data-lucide="plus" class="w-4 h-4"&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="border-t border-gray-700 pt-4"&gt;&lt;h5 class="font-semibold text-white mb-2"&gt;Desglose de Ingresos Anuales&lt;/h5&gt;&lt;table class="w-full text-sm"&gt;&lt;tbody id="noi-breakdown-table"&gt;&lt;/tbody&gt;&lt;tfoot&gt;&lt;tr class="border-t-2 border-gray-600"&gt;&lt;td class="pt-2 font-bold text-white"&gt;NOI Total Proyectado&lt;/td&gt;&lt;td class="pt-2 font-bold text-white text-right" id="noi-total-display"&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;&lt;/table&gt;&lt;/div&gt;&lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.metricDetailModalContent.innerHTML = `&lt;div class="flex justify-between items-center mb-4"&gt;&lt;h3 class="text-xl font-bold text-white"&gt;${metric.details.title}&lt;/h3&gt;&lt;button onclick="app.closeMetricDetailModal()" class="p-1 rounded-full hover:bg-gray-700"&gt;&lt;i data-lucide="x" class="w-5 h-5 text-gray-400"&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;div&gt;${detailContent}&lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (metric.details.type === 'interactive-noi') app.updateInteractiveNoi();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>openModal(dom.metricDetailModal);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>closeMetricDetailModal: () =&gt; closeModal(dom.metricDetailModal),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>openPropertyDetailModal: (propertyId) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const property = state.properties.find(p =&gt; p.id === propertyId);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (!property) return;</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">            </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>let content = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>if (property.id === 3) { // VLINK Special Case</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>content = `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-6 border-b border-gray-700"&gt;&lt;h3 class="text-xl font-bold text-white"&gt;Análisis Pro-Forma: ${property.name}&lt;/h3&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-6 space-y-4"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;p class="text-sm text-gray-300"&gt;Este es un proyecto Build-to-Suit (BTS) con entrega y estabilización proyectada para &lt;strong&gt;Octubre 2026&lt;/strong&gt;.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;h4 class="font-semibold text-white mb-2"&gt;Estrategia de Renta de Salida:&lt;/h4&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;p class="text-sm"&gt;La renta se proyecta utilizando la tasa de mercado actual, más un ajuste por la inflación esperada (USCPI) durante los próximos 12 meses para capturar el valor al momento de la entrega.&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="mt-4 grid grid-cols-3 gap-4 text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;p class="text-xs text-gray-400"&gt;Renta Mercado Hoy&lt;/p&gt;&lt;p class="font-bold text-lg text-white"&gt;$0.75 /ft²&lt;/p&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;i data-lucide="plus" class="mx-auto h-5 w-5 text-gray-500"&gt;&lt;/i&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                            </span>&lt;div&gt;&lt;p class="text-xs text-gray-400"&gt;USCPI (Estimado 12m)&lt;/p&gt;&lt;p class="font-bold text-lg text-white"&gt;2.5%&lt;/p&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;div class="mt-4 border-t border-gray-700 pt-4 text-center"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;p class="text-sm text-gray-400"&gt;Renta Proyectada (Oct 2026)&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                             </span>&lt;p class="text-2xl font-bold text-blue-400"&gt;$${(0.75 * 1.025).toFixed(2)} /ft²&lt;/p&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button class="btn btn-secondary" onclick="app.closePropertyDetailModal()"&gt;Cerrar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>} else {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>content = `</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-6 border-b border-gray-700"&gt;&lt;h3 class="text-xl font-bold text-white"&gt;Rent Roll: ${property.name}&lt;/h3&gt;&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;div class="p-6"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;table class="w-full text-sm text-left"&gt;&lt;thead class="text-xs text-gray-400 uppercase"&gt;&lt;tr&gt;&lt;th class="pb-3"&gt;Inquilino&lt;/th&gt;&lt;th class="pb-3"&gt;Área&lt;/th&gt;&lt;th class="pb-3"&gt;Renta Actual&lt;/th&gt;&lt;th class="pb-3"&gt;Expira&lt;/th&gt;&lt;th class="pb-3"&gt;Escalación&lt;/th&gt;&lt;th class="pb-3"&gt;Tipo&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;tbody class="divide-y divide-gray-700"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>${property.tenants.map(t =&gt; `&lt;tr&gt;&lt;td class="py-2 font-semibold text-white"&gt;${t.name}&lt;/td&gt;&lt;td&gt;${t.gla}&lt;/td&gt;&lt;td&gt;${t.rent}&lt;/td&gt;&lt;td&gt;${t.expiration}&lt;/td&gt;&lt;td&gt;${t.escalation}&lt;/td&gt;&lt;td&gt;&lt;span class="font-mono text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded"&gt;${t.type}&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;`).join('')}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                        </span>&lt;/tbody&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;/table&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                 </span>&lt;div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end"&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                    </span>&lt;button class="btn btn-secondary" onclick="app.closePropertyDetailModal()"&gt;Cerrar&lt;/button&gt;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">                </span>&lt;/div&gt;`;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.propertyDetailModalContent.innerHTML = content;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>lucide.createIcons();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>openModal(dom.propertyDetailModal);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>},</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>closePropertyDetailModal: () =&gt; closeModal(dom.propertyDetailModal),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>// ... other functions</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>};</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- EVENT LISTENERS ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('addBidderBtn').addEventListener('click', () =&gt; openModal(dom.addBidderModal));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('cancelAddBidder').addEventListener('click', () =&gt; closeModal(dom.addBidderModal));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('howToUseBtn').addEventListener('click', () =&gt; openModal(dom.howToUseModal));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('closeHowToUse').addEventListener('click', () =&gt; closeModal(dom.howToUseModal));</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('add-visit-date-btn').addEventListener('click', () =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const dateInput = document.getElementById('visit-date-input');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (dateInput.value &amp;&amp; !state.siteVisit.availableDates.includes(dateInput.value)) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state.siteVisit.availableDates.push(dateInput.value);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>state.siteVisit.availableDates.sort();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>render.availableDates();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dateInput.value = '';</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p2"><span class="s1"><span class="Apple-converted-space">    </span></span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>document.getElementById('addBidderForm').addEventListener('submit', (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>e.preventDefault();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>const newBidder = {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>id: Date.now(),</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>name: document.getElementById('bidderName').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>company: document.getElementById('bidderCompany').value,</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' } },</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>profile: { email: document.getElementById('bidderEmail').value, password: generatePassword(), cel: '', oficina: '', legalEntity: '', legalRep: '', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>};</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>state.bidders.push(newBidder);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>render.all();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>closeModal(dom.addBidderModal);</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>e.target.reset();</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>dom.tabs.addEventListener('click', (e) =&gt; {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>if (e.target.matches('button[data-tab]')) {</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>const tabId = e.target.dataset.tab;</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.tabs.querySelectorAll('button').forEach(btn =&gt; btn.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>e.target.classList.add('active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>dom.tabContentContainer.querySelectorAll('.tab-content').forEach(content =&gt; content.classList.remove('active'));</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">            </span>document.getElementById(`${tabId}-content`).classList.add('active');</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">        </span>}</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>});</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>// --- INITIAL RENDER ---</span></p>
-<p class="p1"><span class="s1"><span class="Apple-converted-space">    </span>render.all();</span></p>
-<p class="p1"><span class="s1">});</span></p>
-<p class="p1"><span class="s1">&lt;/script&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
-<p class="p1"><span class="s1">&lt;/body&gt;</span></p>
-<p class="p1"><span class="s1">&lt;/html&gt;</span></p>
-<p class="p2"><span class="s1"></span><br></p>
+<body class="p-4 md:p-8">
+
+    <div id="app" class="max-w-screen-xl mx-auto">
+        <!-- HEADER -->
+        <header class="mb-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                <div>
+                    <h1 class="text-3xl font-extrabold text-white">Centro de Mando: Licitación PMT-680</h1>
+                    <p class="text-gray-400 mt-1">Plataforma de Gestión Estratégica para Grupo MUSA.</p>
+                </div>
+                <div class="mt-4 md:mt-0 flex gap-2">
+                    <button id="howToUseBtn" class="btn btn-secondary"><i data-lucide="help-circle" class="w-4 h-4"></i>Cómo Usar</button>
+                    <button id="addBidderBtn" class="btn btn-primary"><i data-lucide="user-plus" class="w-4 h-4"></i>Añadir Licitante</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- TABS -->
+        <div class="border-b border-gray-700 mb-8">
+            <nav class="flex -mb-px" id="tabs">
+                <button data-tab="dashboard" class="tab active">Dashboard</button>
+                <button data-tab="dataroom" class="tab">Data Room</button>
+                <button data-tab="config" class="tab">Configuración</button>
+            </nav>
+        </div>
+
+        <!-- TAB CONTENT -->
+        <div id="tab-content-container">
+            <!-- DASHBOARD TAB -->
+            <div id="dashboard-content" class="tab-content active">
+                <main class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                    <div class="lg:col-span-1 space-y-8">
+                        <div class="card p-6">
+                            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="target" class="text-blue-500"></i>Próximos Pasos</h2>
+                            <div id="next-actions-list" class="space-y-3 text-sm"></div>
+                        </div>
+                         <div class="card p-6">
+                            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="bar-chart-3" class="text-blue-500"></i>Dashboard Ejecutivo</h2>
+                            <div id="metrics-list" class="space-y-1 text-gray-300"></div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-3">
+                        <div class="card overflow-hidden">
+                            <div class="p-6"><h2 class="text-xl font-bold text-white flex items-center gap-2"><i data-lucide="users" class="text-blue-500"></i>Panel de Licitantes</h2></div>
+                            <div class="overflow-x-auto"><table class="w-full text-sm text-left text-gray-400"><thead class="text-xs text-gray-300 uppercase bg-gray-700"><tr><th scope="col" class="px-6 py-3">Licitante</th><th scope="col" class="px-6 py-3 w-1/4">Progreso</th><th scope="col" class="px-6 py-3 text-center">NDA</th><th scope="col" class="px-6 py-3 text-center">Visita</th><th scope="col" class="px-6 py-3 text-center">Acciones</th></tr></thead><tbody id="bidders-table-body" class="divide-y divide-gray-700"></tbody></table></div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+
+            <!-- DATA ROOM TAB -->
+            <div id="dataroom-content" class="tab-content">
+                 <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="building-2" class="text-blue-500"></i>Activos en Licitación</h2>
+                        <div id="property-list" class="space-y-2"></div>
+                    </div>
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="folder-kanban" class="text-blue-500"></i>Documentos Base (VDR)</h2>
+                        <div id="template-list" class="space-y-4"></div>
+                    </div>
+                 </main>
+            </div>
+
+            <!-- CONFIG TAB -->
+            <div id="config-content" class="tab-content">
+                <main class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div class="card p-6">
+                        <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2"><i data-lucide="calendar-days" class="text-blue-500"></i>Gestión de Visitas a Sitio</h2>
+                        <div id="site-visits-admin" class="space-y-3">
+                            <p class="text-sm text-gray-400">Define las fechas disponibles para que los licitantes soliciten una visita.</p>
+                            <input type="date" id="visit-date-input" class="input-dark w-full">
+                            <button id="add-visit-date-btn" class="btn btn-secondary w-full text-sm">Añadir Fecha</button>
+                            <ul id="available-dates-list" class="text-sm space-y-1 mt-2"></ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS -->
+    <div id="metricDetailModal" class="modal-backdrop hidden">
+        <div id="metricDetailModalContent" class="modal-content !max-w-3xl p-6"></div>
+    </div>
+    <div id="propertyDetailModal" class="modal-backdrop hidden">
+        <div id="propertyDetailModalContent" class="modal-content !max-w-4xl"></div>
+    </div>
+    <div id="addBidderModal" class="modal-backdrop hidden">
+        <div class="modal-content">
+            <div class="p-6">
+                <h3 class="text-xl font-bold text-white mb-4">Añadir Nuevo Licitante</h3>
+                <form id="addBidderForm" class="space-y-4">
+                    <div><label for="bidderName" class="block text-sm font-medium text-gray-300">Nombre del Licitante / Contacto</label><input type="text" id="bidderName" class="input-dark mt-1" required></div>
+                    <div><label for="bidderEmail" class="block text-sm font-medium text-gray-300">Email (será su usuario)</label><input type="email" id="bidderEmail" class="input-dark mt-1" required></div>
+                    <div><label for="bidderCompany" class="block text-sm font-medium text-gray-300">Empresa / Fondo</label><input type="text" id="bidderCompany" class="input-dark mt-1" required></div>
+                    <div class="flex justify-end gap-3 pt-4"><button type="button" id="cancelAddBidder" class="btn btn-secondary">Cancelar</button><button type="submit" class="btn btn-primary">Guardar Licitante</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="howToUseModal" class="modal-backdrop hidden">
+        <div class="modal-content p-8">
+            <h3 class="text-xl font-bold text-white mb-4">Cómo Usar esta Herramienta</h3>
+            <div class="space-y-4 text-gray-300">
+                 <p><strong>Paso 1: Explora el Dashboard.</strong> Haz clic en cualquier métrica del "Dashboard Ejecutivo" para ver un desglose detallado. Para el NOI 2026, puedes modelar escenarios cambiando la renta de mercado.</p>
+                <p><strong>Paso 2: Gestiona Licitantes.</strong> Haz clic en "Gestionar" en la fila de un licitante. Completa su "Razón Social" y "Representante Legal" para que los contratos se generen correctamente.</p>
+                <p><strong>Paso 3: Genera y Envía el NDA.</strong> Dentro del panel de gestión, haz clic en "Enviar" junto al NDA para abrir el generador. Revisa el documento poblado y márcalo como enviado.</p>
+            </div>
+            <div class="flex justify-end mt-6">
+                <button id="closeHowToUse" class="btn btn-primary">Entendido</button>
+            </div>
+        </div>
+    </div>
+    <div id="manageBidderModal" class="modal-backdrop hidden">
+        <div id="manageBidderModalContent" class="modal-content"></div>
+    </div>
+    <div id="templateModal" class="modal-backdrop hidden">
+        <div id="templateModalContent" class="modal-content !max-w-4xl"></div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons();
+
+    // --- HELPER FUNCTIONS ---
+    const generatePassword = (length = 10) => {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let password = '';
+        for (let i = 0; i < length; i++) password += chars.charAt(Math.floor(Math.random() * chars.length));
+        return password;
+    };
+    
+    const formatCurrency = (value) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+
+    // --- STATE MANAGEMENT ---
+    const state = {
+        properties: [
+            { id: 1, name: 'CEDIS Vía Rápida', detail: '359,628 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=F38F%2BRW', tenants: [
+                { name: 'SEARS', gla: '176,248 Sq Ft', rent: '$0.70/ft²', expiration: 'Ago 2029', escalation: 'CPI Anual', type: 'NNN' },
+                { name: 'CECSO', gla: '183,380 Sq Ft', rent: '$0.51/ft²', expiration: 'Abr 2026', escalation: '2% Fijo Anual', type: 'NNN' }
+            ]},
+            { id: 2, name: 'Waldo’s Lago', detail: '275,109 Sq Ft', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=G337%2BJ4', tenants: [
+                { name: 'Rogers Foam', gla: '162,557 Sq Ft', rent: '$1.02/ft²', expiration: 'Feb 2028', escalation: '4% Fijo Anual', type: 'NNN' },
+                { name: 'Dragon Trade', gla: '37,325 Sq Ft', rent: '$0.95/ft²', expiration: 'Jun 2034', escalation: 'CPI (USA)', type: 'NNN' },
+                { name: 'Seacon Global', gla: '75,227 Sq Ft', rent: '$0.77/ft²', expiration: 'Oct 2025', escalation: '3% Anual', type: 'NNN' }
+            ]},
+            { id: 3, name: 'VLINK Estación García', detail: '43,700 Sq Ft (BTS)', gmapsUrl: 'https://www.google.com/maps/search/?api=1&query=F38C%2B9W6', tenants: [] }
+        ],
+        metrics: [
+            { type: 'header', label: 'Métricas del Portafolio' },
+            { type: 'metric', id: 'gla', name: 'GLA Total', value: '678,437 Sq Ft', icon: 'maximize', details: { title: 'Desglose de GLA Total', type: 'gla-breakdown' } },
+            { type: 'metric', id: 'noi2025', name: 'NOI Actual (2025)', value: 'US $4.79 MM', icon: 'trending-up', details: { title: 'Desglose de NOI Actual (2025)', type: 'list', items: [ { label: 'CEDIS Vía Rápida', value: formatCurrency(2325250) }, { label: 'Waldo’s Lago', value: formatCurrency(2468049) }, { label: 'VLINK Estación García', value: formatCurrency(0) } ] } },
+            { type: 'metric', id: 'noi2026', name: 'NOI (Expected 2026)', value: 'US $5.58 MM', icon: 'trending-up', details: { 
+                title: 'Modelo Interactivo NOI 2026', 
+                type: 'interactive-noi', 
+                defaultMarketRent: 0.75,
+                components: [
+                    { label: 'SEARS', gla: 176248, rate: 0.71, isMarketRate: false },
+                    { label: 'CECSO', gla: 183380, rate: 0.52, isMarketRate: false },
+                    { label: 'Rogers Foam', gla: 162557, rate: 1.06, isMarketRate: false },
+                    { label: 'Dragon Trade', gla: 37325, rate: 0.97, isMarketRate: false },
+                    { label: 'Seacon Global', gla: 75227, isMarketRate: true },
+                    { label: 'VLINK (3 meses)', gla: 43700, months: 3, isMarketRate: true }
+                ]
+            }},
+            { type: 'divider' },
+            { type: 'header', label: 'Indicadores de Mercado (Tijuana Q1 2025)' },
+            { type: 'metric', id: 'vacancy', name: 'Vacancia Reportada', value: '5.91%', icon: 'home', details: { title: 'Análisis de Vacancia', type: 'note', content: 'La vacancia reportada del 5.91% (con una vacancia efectiva cercana al 7.8%) indica una normalización del mercado post-pandemia. Esto crea una ventana de oportunidad para vender activos estabilizados antes de que la nueva oferta presione las rentas a la baja.' } },
+        ],
+        templates: [
+            { id: 'nda', name: 'Acuerdo de Confidencialidad (NDA)', content: `CONVENIO DE CONFIDENCIALIDAD QUE CELEBRAN POR UNA PARTE PROYECTOS Y CONSTRUCCIONES MUSA, S.A. DE C.V., REPRESENTADA POR MARTHA ALICIA FUENTES GARCÍA Y [RAZON_SOCIAL_RECEPTOR], REPRESENTADA POR [NOMBRE_REP_LEGAL_RECEPTOR], Y QUE EN LO SUCESIVO, CONJUNTAMENTE SE DENOMINAN COMO LAS “PARTES” E INDISTINTAMENTE COMO LA “PARTE”, CONVENIO QUE SE REGIRÁ AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLAUSULAS: ...[RESTO DEL TEXTO DEL NDA]` },
+            { id: 'bases', name: 'Bases de Licitación', content: '' },
+            { id: 'oferta', name: 'Formato de Oferta Económica', content: '' }
+        ],
+        siteVisit: {
+            availableDates: [],
+            requests: [] 
+        },
+        bidders: [
+            { id: 1, name: 'Jorge Girault', company: 'FIBRA Prologis', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'jgirault@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'FIBRA Prologis, S. de R.L. de C.V.', legalRep: 'Jorge Girault', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 2, name: 'Álvaro Rodríguez', company: 'FIBRA Macquarie', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'arodriguez@macquarie.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Macquarie Mexican REIT', legalRep: 'Álvaro Rodríguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 3, name: 'Rogelio Jiménez', company: 'FIBRA Monterrey (FMTY)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rjimenez@fibramty.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Fibra MTY, S.A.P.I. de C.V.', legalRep: 'Rogelio Jiménez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 4, name: 'Sergio Argüelles', company: 'FIBRA Terrafina', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'sarguelles@terrafina.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Terrafina, S.A.B. de C.V.', legalRep: 'Sergio Argüelles', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 5, name: 'Gustavo Tomé', company: 'Corporate Properties of the Americas (CPA)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'gtome@cpamericas.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'CPA SERVICIOS, S. DE R.L. DE C.V.', legalRep: 'Gustavo Tomé', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 6, name: 'Lorenzo Dominique', company: 'Vesta (NYSE VTMX)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ldominique@vesta.com.mx', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Corporación Inmobiliaria Vesta, S.A.B. de C.V.', legalRep: 'Lorenzo Dominique', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 7, name: 'Francisco Garza', company: 'Grupo GP / GP Desarrollos', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'fgarza@grupogp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GP Desarrollos, S.A. de C.V.', legalRep: 'Francisco Garza', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 8, name: 'Ignacio Pérez', company: 'STIVA', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'iperez@stiva.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'STIVA, S.A. de C.V.', legalRep: 'Ignacio Pérez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 9, name: 'Mark Hansen', company: 'Prologis Inc. (NYSE PLD)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'mhansen@prologis.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Prologis, Inc.', legalRep: 'Mark Hansen', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 10, name: 'Carlos Flores', company: 'Blackstone RE (BREIT / BREP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'cflores@blackstone.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Blackstone Real Estate', legalRep: 'Carlos Flores', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 11, name: 'Ramiro Cepeda', company: 'Brookfield AM', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rcepeda@brookfield.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Brookfield Asset Management', legalRep: 'Ramiro Cepeda', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 12, name: 'Adrián Teo', company: 'GIC (Singapur)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ateo@gic.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GIC Private Limited', legalRep: 'Adrián Teo', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 13, name: 'Khalid Al-Ghamdi', company: 'PIF (Arabia Saudí)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'kalghamdi@pif.gov.sa', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Public Investment Fund', legalRep: 'Khalid Al-Ghamdi', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 14, name: 'Adolfo Riveroll', company: 'JD Property (JDP)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ariveroll@jd.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'JD Property', legalRep: 'Adolfo Riveroll', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 15, name: 'Chong Keh', company: 'Mapletree Logistics Trust (MLT)', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'ckeh@mapletree.com.sg', password: generatePassword(), cel: '', oficina: '', legalEntity: 'Mapletree Logistics Trust Management Ltd.', legalRep: 'Chong Keh', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 16, name: 'Tomás Cha', company: 'GLP Capital Partners', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'tcha@glp.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'GLP Capital Partners', legalRep: 'Tomás Cha', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 17, name: 'Richard Tse', company: 'ESR', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'rtse@esr.com', password: generatePassword(), cel: '', oficina: '', legalEntity: 'ESR Group Limited', legalRep: 'Richard Tse', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }},
+            { id: 18, name: 'Oliver Rodriguez', company: 'Vlads Capital', docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' }}, profile: { email: 'oliver@vladscapital.com', password: generatePassword(), cel: '6641553525', oficina: '', legalEntity: 'Vlads Capital, S.A.P.I. de C.V.', legalRep: 'Oliver Rodriguez', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }}
+        ]
+    };
+
+    // --- DOM ELEMENT REFERENCES ---
+    const dom = {
+        nextActionsList: document.getElementById('next-actions-list'),
+        templateList: document.getElementById('template-list'),
+        biddersTableBody: document.getElementById('bidders-table-body'),
+        addBidderModal: document.getElementById('addBidderModal'),
+        manageBidderModal: document.getElementById('manageBidderModal'),
+        manageBidderModalContent: document.getElementById('manageBidderModalContent'),
+        templateModal: document.getElementById('templateModal'),
+        templateModalContent: document.getElementById('templateModalContent'),
+        availableDatesList: document.getElementById('available-dates-list'),
+        propertyList: document.getElementById('property-list'),
+        tabs: document.getElementById('tabs'),
+        tabContentContainer: document.getElementById('tab-content-container'),
+        metricsList: document.getElementById('metrics-list'),
+        metricDetailModal: document.getElementById('metricDetailModal'),
+        metricDetailModalContent: document.getElementById('metricDetailModalContent'),
+        propertyDetailModal: document.getElementById('propertyDetailModal'),
+        propertyDetailModalContent: document.getElementById('propertyDetailModalContent'),
+        howToUseModal: document.getElementById('howToUseModal')
+    };
+
+    // --- RENDER FUNCTIONS ---
+    const render = {
+        statusBadge: (status) => {
+            const statuses = { 'pendiente': 'status-pendiente', 'enviado': 'status-enviado', 'recibido': 'status-recibido', 'solicitada': 'status-enviado', 'confirmada': 'status-recibido' };
+            return `<span class="status-badge ${statuses[status] || 'status-pendiente'}">${status}</span>`;
+        },
+        progress: (bidder) => {
+            let completed = 0;
+            const total = 3; 
+            const visit = state.siteVisit.requests.find(r => r.bidderId === bidder.id);
+            if (bidder.profile.legalEntity && bidder.profile.cel) completed++;
+            if (bidder.docs.nda.status === 'recibido') completed++;
+            if (visit && visit.status === 'confirmada') completed++;
+            return Math.round((completed / total) * 100);
+        },
+        bidders: () => {
+            dom.biddersTableBody.innerHTML = state.bidders.map(b => {
+                const progress = render.progress(b);
+                const visitStatus = state.siteVisit.requests.find(r => r.bidderId === b.id);
+                return `
+                <tr class="hover:bg-gray-800">
+                    <td class="px-6 py-4"><div class="font-bold text-white">${b.name}</div><div class="text-xs text-gray-400">${b.company}</div></td>
+                    <td class="px-6 py-4"><div class="flex items-center gap-2"><div class="w-full progress-bar h-2"><div class="progress-bar-inner" style="width: ${progress}%"></div></div><span class="text-xs font-semibold">${progress}%</span></div></td>
+                    <td class="px-6 py-4 text-center">${render.statusBadge(b.docs.nda.status)}</td>
+                    <td class="px-6 py-4 text-center">${visitStatus ? render.statusBadge(visitStatus.status) : render.statusBadge('pendiente')}</td>
+                    <td class="px-6 py-4 text-center"><button class="btn btn-primary text-xs !py-1 !px-3" onclick="app.openManageModal(${b.id})">Gestionar</button></td>
+                </tr>`;
+            }).join('');
+            lucide.createIcons();
+        },
+        nextActions: () => {
+            let actions = [];
+            state.bidders.forEach(b => {
+                if (b.docs.nda.status === 'pendiente') actions.push({ text: `Enviar NDA a <strong>${b.company}</strong>.`, bidderId: b.id });
+                else if (b.docs.nda.status === 'enviado') actions.push({ text: `Dar seguimiento a NDA con <strong>${b.company}</strong>.`, bidderId: b.id });
+                const visit = state.siteVisit.requests.find(r => r.bidderId === b.id);
+                if (visit && visit.status === 'solicitada') actions.push({ text: `Confirmar visita con <strong>${b.company}</strong>.`, bidderId: b.id });
+            });
+            if (actions.length === 0) { dom.nextActionsList.innerHTML = `<p class="text-gray-400">No hay acciones críticas pendientes.</p>`; return; }
+            dom.nextActionsList.innerHTML = actions.map(action => `<div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-800 cursor-pointer" onclick="app.openManageModal(${action.bidderId})"><i data-lucide="alert-circle" class="w-5 h-5 text-yellow-400 flex-shrink-0"></i><p class="text-gray-300">${action.text}</p></div>`).join('');
+            lucide.createIcons();
+        },
+        availableDates: () => {
+            dom.availableDatesList.innerHTML = state.siteVisit.availableDates.map(date => `<li class="flex justify-between items-center bg-gray-800 p-2 rounded-md"><span>${new Date(date + 'T00:00:00').toLocaleDateString('es-MX', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span><button onclick="app.removeVisitDate('${date}')" class="text-red-400 hover:text-red-600"><i data-lucide="trash-2" class="w-4 h-4"></i></button></li>`).join('');
+            lucide.createIcons();
+        },
+        templates: () => {
+            dom.templateList.innerHTML = state.templates.map(t => `<div class="flex justify-between items-center"><span class="font-medium text-sm">${t.name}</span><button class="btn btn-secondary text-xs" onclick="app.openTemplateModal('${t.id}')">Gestionar</button></div>`).join('');
+        },
+        properties: () => {
+            dom.propertyList.innerHTML = state.properties.map(p => `<a href="${p.gmapsUrl}" target="_blank" class="block p-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer"><div class="flex items-center justify-between"><div class="flex items-start gap-3"><i data-lucide="map-pin" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"></i><div><p class="font-semibold text-white">${p.name}</p><p class="text-sm text-gray-400">${p.detail}</p></div></div><i data-lucide="external-link" class="w-4 h-4 text-gray-500"></i></div></a>`).join('');
+            lucide.createIcons();
+        },
+        metrics: () => {
+            dom.metricsList.innerHTML = state.metrics.map(m => {
+                if (m.type === 'header') return `<h3 class="text-md font-semibold text-gray-400 pt-2">${m.label}</h3>`;
+                if (m.type === 'divider') return `<hr class="my-2 border-gray-700">`;
+                return `<div class="metric-item p-3" onclick="app.openMetricDetailModal('${m.id}')"><div class="flex items-center gap-4"><div class="bg-gray-700 p-2 rounded-full"><i data-lucide="${m.icon}" class="w-6 h-6 text-blue-400"></i></div><div><p class="text-sm text-gray-400">${m.name}</p><p class="font-bold text-lg text-white">${m.value}</p></div></div></div>`
+            }).join('');
+            lucide.createIcons();
+        },
+        all: () => {
+            render.templates();
+            render.bidders();
+            render.availableDates();
+            render.nextActions();
+            render.properties();
+            render.metrics();
+        }
+    };
+
+    // --- MODAL CONTROLLERS ---
+    const openModal = (modal) => modal.classList.remove('hidden');
+    const closeModal = (modal) => modal.classList.add('hidden');
+
+    // --- GLOBAL APP OBJECT for inline event handlers ---
+    window.app = {
+        openMetricDetailModal: (metricId) => {
+            const metric = state.metrics.find(m => m.id === metricId);
+            if (!metric || !metric.details) return;
+
+            let detailContent = '';
+            if (metric.details.type === 'list') {
+                detailContent = `<ul class="space-y-2 text-sm">` +
+                    metric.details.items.map(item => `<li class="flex justify-between"><span>${item.label}:</span><span class="font-semibold text-white">${item.value}</span></li>`).join('') +
+                    `</ul>`;
+            } else if (metric.details.type === 'gla-breakdown') {
+                 detailContent = `<ul class="space-y-2 text-sm">` +
+                    state.properties.map(p => `<li class="flex justify-between items-center p-2 rounded-md hover:bg-gray-800 cursor-pointer" onclick="app.openPropertyDetailModal(${p.id})"><span>${p.name}:</span><span class="font-semibold text-white">${p.detail}</span></li>`).join('') +
+                    `</ul>`;
+            } else if (metric.details.type === 'note') {
+                detailContent = `<p class="text-sm text-gray-300">${metric.details.content}</p>`;
+            } else if (metric.details.type === 'interactive-noi') {
+                detailContent = `<div class="space-y-4"><div><label class="text-sm font-medium text-gray-400">Renta de Mercado Estimada (USD/ft²)</label><div class="flex items-center gap-2 mt-1"><button class="btn btn-secondary !p-2" onclick="app.adjustRent(-0.01)"><i data-lucide="minus" class="w-4 h-4"></i></button><input type="number" step="0.01" id="market-rent-input" class="input-dark text-center" value="${metric.details.defaultMarketRent.toFixed(2)}" onchange="app.updateInteractiveNoi()"><button class="btn btn-secondary !p-2" onclick="app.adjustRent(0.01)"><i data-lucide="plus" class="w-4 h-4"></i></button></div></div><div class="border-t border-gray-700 pt-4"><h5 class="font-semibold text-white mb-2">Desglose de Ingresos Anuales</h5><table class="w-full text-sm"><tbody id="noi-breakdown-table"></tbody><tfoot><tr class="border-t-2 border-gray-600"><td class="pt-2 font-bold text-white">NOI Total Proyectado</td><td class="pt-2 font-bold text-white text-right" id="noi-total-display"></td></tr></tfoot></table></div></div>`;
+            }
+
+            dom.metricDetailModalContent.innerHTML = `<div class="flex justify-between items-center mb-4"><h3 class="text-xl font-bold text-white">${metric.details.title}</h3><button onclick="app.closeMetricDetailModal()" class="p-1 rounded-full hover:bg-gray-700"><i data-lucide="x" class="w-5 h-5 text-gray-400"></i></button></div><div>${detailContent}</div>`;
+            lucide.createIcons();
+            if (metric.details.type === 'interactive-noi') app.updateInteractiveNoi();
+            openModal(dom.metricDetailModal);
+        },
+        closeMetricDetailModal: () => closeModal(dom.metricDetailModal),
+        openPropertyDetailModal: (propertyId) => {
+            const property = state.properties.find(p => p.id === propertyId);
+            if (!property) return;
+            
+            let content = '';
+            if (property.id === 3) { // VLINK Special Case
+                content = `
+                <div class="p-6 border-b border-gray-700"><h3 class="text-xl font-bold text-white">Análisis Pro-Forma: ${property.name}</h3></div>
+                <div class="p-6 space-y-4">
+                    <p class="text-sm text-gray-300">Este es un proyecto Build-to-Suit (BTS) con entrega y estabilización proyectada para <strong>Octubre 2026</strong>.</p>
+                    <div class="bg-gray-900/50 p-4 rounded-lg border border-gray-700">
+                        <h4 class="font-semibold text-white mb-2">Estrategia de Renta de Salida:</h4>
+                        <p class="text-sm">La renta se proyecta utilizando la tasa de mercado actual, más un ajuste por la inflación esperada (USCPI) durante los próximos 12 meses para capturar el valor al momento de la entrega.</p>
+                        <div class="mt-4 grid grid-cols-3 gap-4 text-center">
+                            <div><p class="text-xs text-gray-400">Renta Mercado Hoy</p><p class="font-bold text-lg text-white">$0.75 /ft²</p></div>
+                            <div><i data-lucide="plus" class="mx-auto h-5 w-5 text-gray-500"></i></div>
+                            <div><p class="text-xs text-gray-400">USCPI (Estimado 12m)</p><p class="font-bold text-lg text-white">2.5%</p></div>
+                        </div>
+                        <div class="mt-4 border-t border-gray-700 pt-4 text-center">
+                             <p class="text-sm text-gray-400">Renta Proyectada (Oct 2026)</p>
+                             <p class="text-2xl font-bold text-blue-400">$${(0.75 * 1.025).toFixed(2)} /ft²</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end">
+                    <button class="btn btn-secondary" onclick="app.closePropertyDetailModal()">Cerrar</button>
+                </div>
+                `;
+            } else {
+                 content = `
+                <div class="p-6 border-b border-gray-700"><h3 class="text-xl font-bold text-white">Rent Roll: ${property.name}</h3></div>
+                <div class="p-6">
+                    <table class="w-full text-sm text-left"><thead class="text-xs text-gray-400 uppercase"><tr><th class="pb-3">Inquilino</th><th class="pb-3">Área</th><th class="pb-3">Renta Actual</th><th class="pb-3">Expira</th><th class="pb-3">Escalación</th><th class="pb-3">Tipo</th></tr></thead>
+                        <tbody class="divide-y divide-gray-700">
+                        ${property.tenants.map(t => `<tr><td class="py-2 font-semibold text-white">${t.name}</td><td>${t.gla}</td><td>${t.rent}</td><td>${t.expiration}</td><td>${t.escalation}</td><td><span class="font-mono text-xs bg-blue-900/50 text-blue-300 px-2 py-1 rounded">${t.type}</span></td></tr>`).join('')}
+                        </tbody>
+                    </table>
+                </div>
+                 <div class="p-4 bg-gray-900/50 border-t border-gray-700 flex justify-end">
+                    <button class="btn btn-secondary" onclick="app.closePropertyDetailModal()">Cerrar</button>
+                </div>`;
+            }
+            dom.propertyDetailModalContent.innerHTML = content;
+            lucide.createIcons();
+            openModal(dom.propertyDetailModal);
+        },
+        closePropertyDetailModal: () => closeModal(dom.propertyDetailModal),
+        openManageModal: (bidderId) => {
+            const bidder = state.bidders.find(b => b.id === bidderId);
+            if (!bidder) return;
+            
+            dom.manageBidderModalContent.innerHTML = `
+                <div class="p-6 border-b border-gray-700">
+                    <div class="flex justify-between items-start">
+                        <div><h3 class="text-xl font-bold text-white">${bidder.name}</h3><p class="text-gray-400">${bidder.company}</p></div>
+                        <div class="flex items-center gap-2">
+                           <button class="btn btn-secondary text-xs" onclick="app.openBidderPortalModal(${bidder.id})"><i data-lucide="eye" class="w-4 h-4"></i>Ver Portal</button>
+                           <button onclick="app.closeManageModal()" class="p-1 rounded-full hover:bg-gray-700"><i data-lucide="x" class="w-5 h-5 text-gray-400"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 max-h-[70vh] overflow-y-auto">
+                    <h4 class="text-lg font-semibold text-white mb-4">Perfil y Compliance</h4>
+                    <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                            <div class="space-y-4">
+                                <h5 class="font-semibold text-white">Información Legal y de Contacto</h5>
+                                <div><label class="text-sm font-medium text-gray-400">Razón Social</label><input type="text" id="profile-legalEntity" value="${bidder.profile.legalEntity}" class="input-dark mt-1 text-sm"></div>
+                                <div><label class="text-sm font-medium text-gray-400">Representante Legal</label><input type="text" id="profile-legalRep" value="${bidder.profile.legalRep}" class="input-dark mt-1 text-sm"></div>
+                                <div><label class="text-sm font-medium text-gray-400">Email Principal</label><input type="email" id="profile-email" value="${bidder.profile.email}" class="input-dark mt-1 text-sm"></div>
+                                <div><label class="text-sm font-medium text-gray-400">Celular Principal</label><input type="tel" id="profile-cel" value="${bidder.profile.cel}" class="input-dark mt-1 text-sm"></div>
+                            </div>
+                            <div class="space-y-3">
+                                <h5 class="font-semibold text-white">Documentos de Identidad</h5>
+                            </div>
+                        </div>
+                        <div class="mt-6 flex justify-end"><button class="btn btn-primary" onclick="app.saveProfile(${bidder.id})">Guardar Perfil</button></div>
+                    </div>
+                </div>
+            `;
+            lucide.createIcons();
+            openModal(dom.manageBidderModal);
+        },
+        closeManageModal: () => closeModal(dom.manageBidderModal),
+        openTemplateModal: (templateId) => {
+            const template = state.templates.find(t => t.id === templateId);
+            if (!template) return;
+            dom.templateModalContent.innerHTML = `
+                <div class="p-6 border-b border-gray-700"><h3 class="text-xl font-bold text-white">Gestionar Plantilla: ${template.name}</h3></div>
+                <div class="p-6"><textarea id="template-editor" class="input-dark w-full h-96 text-xs font-mono">${template.content}</textarea></div>
+                <div class="p-6 bg-gray-900/50 border-t border-gray-700 flex justify-end gap-3">
+                    <button class="btn btn-secondary" onclick="app.closeTemplateModal()">Cancelar</button>
+                    <button class="btn btn-primary" onclick="app.saveTemplate('${template.id}')">Guardar Plantilla</button>
+                </div>
+            `;
+            openModal(dom.templateModal);
+        },
+        closeTemplateModal: () => closeModal(dom.templateModal),
+        saveTemplate: (templateId) => {
+            const template = state.templates.find(t => t.id === templateId);
+            if (!template) return;
+            template.content = document.getElementById('template-editor').value;
+            alert('Plantilla guardada.');
+            closeModal(dom.templateModal);
+        },
+        saveProfile: (bidderId) => {
+            const bidder = state.bidders.find(b => b.id === bidderId);
+            if (!bidder) return;
+            bidder.profile.legalEntity = document.getElementById('profile-legalEntity').value;
+            bidder.profile.legalRep = document.getElementById('profile-legalRep').value;
+            bidder.profile.email = document.getElementById('profile-email').value;
+            bidder.profile.cel = document.getElementById('profile-cel').value;
+            alert('Información de perfil guardada.');
+            render.all();
+            app.openManageModal(bidderId);
+        },
+    };
+
+    // --- EVENT LISTENERS ---
+    document.getElementById('addBidderBtn').addEventListener('click', () => openModal(dom.addBidderModal));
+    document.getElementById('cancelAddBidder').addEventListener('click', () => closeModal(dom.addBidderModal));
+    document.getElementById('howToUseBtn').addEventListener('click', () => openModal(dom.howToUseModal));
+    document.getElementById('closeHowToUse').addEventListener('click', () => closeModal(dom.howToUseModal));
+    
+    document.getElementById('add-visit-date-btn').addEventListener('click', () => {
+        const dateInput = document.getElementById('visit-date-input');
+        if (dateInput.value && !state.siteVisit.availableDates.includes(dateInput.value)) {
+            state.siteVisit.availableDates.push(dateInput.value);
+            state.siteVisit.availableDates.sort();
+            render.availableDates();
+            dateInput.value = '';
+        }
+    });
+    
+    document.getElementById('addBidderForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const newBidder = {
+            id: Date.now(),
+            name: document.getElementById('bidderName').value,
+            company: document.getElementById('bidderCompany').value,
+            docs: { nda: { status: 'pendiente' }, bases: { status: 'pendiente' }, oferta: { status: 'pendiente' } },
+            profile: { email: document.getElementById('bidderEmail').value, password: generatePassword(), cel: '', oficina: '', legalEntity: '', legalRep: '', acta: {status: 'pendiente'}, idRep: {status: 'pendiente'}, kyc: {status: 'pendiente'}, aml: {status: 'pendiente'} }
+        };
+        state.bidders.push(newBidder);
+        render.all();
+        closeModal(dom.addBidderModal);
+        e.target.reset();
+    });
+
+    dom.tabs.addEventListener('click', (e) => {
+        if (e.target.matches('button[data-tab]')) {
+            const tabId = e.target.dataset.tab;
+            dom.tabs.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+            e.target.classList.add('active');
+            dom.tabContentContainer.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(`${tabId}-content`).classList.add('active');
+        }
+    });
+
+    // --- INITIAL RENDER ---
+    render.all();
+});
+</script>
+
 </body>
 </html>
+
